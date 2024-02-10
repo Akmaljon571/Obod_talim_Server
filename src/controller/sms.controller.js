@@ -59,7 +59,7 @@ export const smsCreate = async (req, res) => {
 
 export const smsTeacher = async (req, res) => {
     try {
-        const { id } = req.teacher.value
+        const { id } = req.teacher
 
         const all = await Message.find()
         res.status(200).json({

@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import jwt from 'jsonwebtoken'
 dotenv.config()
 
 export default (req, res, next) => {
@@ -8,7 +9,7 @@ export default (req, res, next) => {
         return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    jwt.verify(token, secretKey, (err, value) => {
+    jwt.verify(token, process.env.SECRET_KEY, (err, value) => {
         if (err) {
             return res.status(403).json({ error: 'Forbidden' });
         }

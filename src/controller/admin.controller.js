@@ -98,7 +98,7 @@ export const dashboardAdmin = async (req, res) => {
 
 export const dashboardTeacher = async (req, res) => {
     try {
-        const { id } = req.teacher.value
+        const { id } = req.teacher
 
         const allStudent = await Student.find()
         const allGuruh = await Guruh.find()
