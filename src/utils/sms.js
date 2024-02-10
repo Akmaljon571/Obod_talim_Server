@@ -23,7 +23,7 @@ class Sms {
             );
             const data = await response.data;
             fs.writeFileSync(
-                path.join(__dirname, '../../src/utils/token.json'),
+                path.join(process.cwd(), 'src/utils/token.json'),
                 JSON.stringify(data, null, 2),
             );
         } catch (error) {
@@ -35,7 +35,7 @@ class Sms {
         try {
             const data = JSON.parse(
                 fs.readFileSync(
-                    path.join(__dirname, '../../src/utils/token.json'),
+                    path.join(process.cwd(), 'src/utils/token.json'),
                 ),
             );
             const config = {
@@ -55,6 +55,7 @@ class Sms {
             const response = await axios(config);
             return await response.data;
         } catch (error) {
+            console.log(error)
             if (error?.response?.status === 401 || error?.response?.status === 403) {
                 await this.auth();
                 await this.send({ phone, message });
@@ -72,7 +73,7 @@ class Sms {
         try {
             const data = JSON.parse(
                 fs.readFileSync(
-                    path.join(__dirname, '../../src/utils/token.json'),
+                    path.join(process.cwd(), 'src/utils/token.json'),
                 ),
             );
 

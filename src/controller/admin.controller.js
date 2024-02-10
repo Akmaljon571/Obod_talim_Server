@@ -59,8 +59,7 @@ export const loginCode = async (req, res) => {
         const token = jwt.sign({ id: find._id, status: data.status }, process.env.SECRET_KEY)
         res.status(200).json({
             status: 200,
-            token,
-            find
+            token
         })
     } catch (error) {
         console.log(error)
@@ -99,7 +98,7 @@ export const dashboardAdmin = async (req, res) => {
 
 export const dashboardTeacher = async (req, res) => {
     try {
-        const { id } = req.teacher
+        const { id } = req.teacher.value
 
         const allStudent = await Student.find()
         const allGuruh = await Guruh.find()
