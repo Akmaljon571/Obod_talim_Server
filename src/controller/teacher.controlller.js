@@ -2,7 +2,7 @@ import remove_img from '../utils/remove_img.js'
 import Teacher from "../model/teacher.js"
 import { createHash } from "../utils/bcrypt.js"
 
-export const findOne = async (req, res) => {
+const findOne = async (req, res) => {
     const all = await Teacher.find()
     const find = all.find(e => e._id == req.params.id)
     if (!find) {
@@ -69,6 +69,24 @@ export const teacherAll = async (req, res) => {
             length: all.length,
             page,
             pageSize,
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            status: 500,
+            message: "Internal Server Error!"
+        })
+    }
+}
+
+export const teacherToken = async (req, res) => {
+    try {
+        const { id } = req.teacher
+        const all = await Teacher.find()
+        const one = all.find(e => e._id == id)
+        res.status(200).json({
+            status: 200,
+            data: one
         })
     } catch (error) {
         console.log(error)
