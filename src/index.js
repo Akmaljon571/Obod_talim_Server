@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import path from 'path'
 import router from './router/index.js'
 dotenv.config()
 
@@ -17,6 +18,8 @@ db.once('open', () => {
 });
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use('/image', express.static(path.join(process.cwd(), 'uploads')));
 app.use(cors({
     origin: 'http://localhost:3000',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

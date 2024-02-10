@@ -9,7 +9,8 @@ export const smsCreate = async (req, res) => {
         if (status == 'teacher') {
             const teacher = await Teacher.find()
             const one = teacher.find(e => e._id == send_id)
-            if (one) { 
+            if (one) {
+                console.log({ phone: Number(one.raqam), message: desc })
                 await SMS.send({ phone: one.raqam, message: desc })
                 await Message.create({
                     send_id,
@@ -58,7 +59,7 @@ export const smsCreate = async (req, res) => {
 
 export const smsTeacher = async (req, res) => {
     try {
-        const { id } = req.teacher
+        const { id } = req.teacher.value
 
         const all = await Message.find()
         res.status(200).json({

@@ -86,13 +86,13 @@ export const teacherUpdate = async (req, res) => {
         const all = await Teacher.find()
         const one = all.find(e => e._id == req.params.id)
         if (one) {
-            filename && remove_img(one.logo)
+            filename && remove_img(one.image)
             await Teacher.updateOne({ _id: one._id }, {
                 $set: {
                     username: body.username || one.username,
                     familiya: body.familiya || one.familiya,
                     email: body.email || one.email,
-                    password: await createHash(body.password) || one.password,
+                    password: body.password ? await createHash(body.password) : one.password,
                     image: filename || one.image,
                     kocha: body.kocha || one.kocha,
                     uy: body.uy || one.uy,
