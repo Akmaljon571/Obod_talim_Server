@@ -2,7 +2,7 @@ import remove_img from '../utils/remove_img.js'
 import Teacher from "../model/teacher.js"
 import { createHash } from "../utils/bcrypt.js"
 
-const findOne = async (req, res) => {
+export const findOne = async (req, res) => {
     const all = await Teacher.find()
     const find = all.find(e => e._id == req.params.id)
     if (!find) {
