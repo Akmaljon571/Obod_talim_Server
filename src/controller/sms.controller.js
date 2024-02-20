@@ -62,9 +62,9 @@ export const smsTeacher = async (req, res) => {
         const { id } = req.teacher
 
         const all = await Message.find()
-        res.status(200).json({
+        return res.status(200).json({
             status: 200,
-            data: all.filter(e => e._id == id && e.status == 'teacher')
+            data: all.filter(e => e.send_id == id && e.status == 'teacher')
         })
     } catch (error) {
         console.log(error)

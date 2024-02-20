@@ -103,9 +103,9 @@ export const dashboardTeacher = async (req, res) => {
         const allStudent = await Student.find()
         const allGuruh = await Guruh.find()
         const guruh = allGuruh.filter(e => e.teacher_id == id)
-        let students
+        let students = 0
         for (let i = 0; i < guruh.length; i++) {
-            students += allStudent.filter(e => e.guruh_id == guruh[i]._id).length
+            students += allStudent.filter(e => String(e.guruh_id) == String(guruh[i]._id)).length
         }
         const data = {
             groups: guruh.length,
