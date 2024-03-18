@@ -10,7 +10,6 @@ export const smsCreate = async (req, res) => {
             const teacher = await Teacher.find()
             const one = teacher.find(e => e._id == send_id)
             if (one) {
-                console.log({ phone: Number(one.raqam), message: desc })
                 await SMS.send({ phone: one.raqam, message: desc })
                 await Message.create({
                     send_id,
